@@ -1,0 +1,25 @@
+{
+  "app": { "title": "Find a Rate", "toggle": "FR" },
+  "nav": { "find": "Find", "rates": "Rates" },
+  "find": {
+    "title": "Find Rate",
+    "from": "Sending from",
+    "toCountry": "Sending to",
+    "to": "Destination address or postal code",
+    "kind": "What are you sending",
+    "dimensions": { "l": "L", "w": "W", "h": "H", "unit": "Unit" },
+    "weight": { "label": "Weight", "unit": "Unit" },
+    "submit": "View rates",
+    "kindOptions": { "package": "Package", "letter": "Letter" },
+    "lenUnits": { "cm": "cm", "in": "in" },
+    "wtUnits": { "kg": "kg", "lb": "lb" }
+  },
+  "rates": {
+    "title": "Rates",
+    "back": "Back to Find Rate",
+    "continue": "Continue",
+    "summary": "Rates for {{kind}} ({{weight}} {{wtUnit}}) {{l}}×{{w}}×{{h}} {{lenUnit}} going to {{to}}",
+    "eta": "business days",
+    "co2": "kg CO₂e"
+  }
+}

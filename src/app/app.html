@@ -1,5 +1,9 @@
-    <header style="display:flex; gap:1rem; padding:1rem">
-      <a routerLink="/find">Find</a>      
-      <a routerLink="/rates">Rates</a>
-    </header>
-    <router-outlet />
+<header class="bar">
+  <h1>{{ 'app.title' | translate }}</h1>
+  <nav>
+    <a routerLink="/find">{{ 'nav.find' | translate }}</a>
+    <a routerLink="/rates">{{ 'nav.rates' | translate }}</a>
+    <button (click)="toggle()">{{ 'app.toggle' | translate }}</button>
+  </nav>
+</header>
+<main class="shell"><router-outlet /></main>

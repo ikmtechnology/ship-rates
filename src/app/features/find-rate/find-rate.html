@@ -1,3 +1,53 @@
-<h2>find-rate</h2>
-<p>This is the Find Rate page.</p>
-<button (click)="goToRates()">Go to Rates</button>
+<h2>{{ 'find.title' | translate }}</h2>
+
+<label>
+  {{ 'find.from' | translate }}
+  <input type="text" />
+</label>
+
+<label>
+  {{ 'find.toCountry' | translate }}
+  <select>
+    <option value="Canada">Canada</option>
+    <option value="USA">USA</option>
+    <option value="International">International</option>
+  </select>
+</label>
+
+<label>
+  {{ 'find.to' | translate }}
+  <input type="text" />
+</label>
+
+<label>
+  {{ 'find.kind' | translate }}
+  <select>
+    <option *ngFor="let o of kindOptions" [value]="o.value">
+      {{ o.label | translate }}
+    </option>
+  </select>
+</label>
+
+<div class="grid3">
+  <label>{{ 'find.dimensions.l' | translate }} <input type="number"></label>
+  <label>{{ 'find.dimensions.w' | translate }} <input type="number"></label>
+  <label>{{ 'find.dimensions.h' | translate }} <input type="number"></label>
+  <label>
+    {{ 'find.dimensions.unit' | translate }}
+    <select>
+      <option *ngFor="let u of lenUnits" [value]="u">{{ ('find.lenUnits.' + u) | translate }}</option>
+    </select>
+  </label>
+</div>
+
+<div class="grid2">
+  <label>{{ 'find.weight.label' | translate }} <input type="number"></label>
+  <label>
+    {{ 'find.weight.unit' | translate }}
+    <select>
+      <option *ngFor="let u of wtUnits" [value]="u">{{ ('find.wtUnits.' + u) | translate }}</option>
+    </select>
+  </label>
+</div>
+
+<button (click)="goToRates()">{{ 'find.submit' | translate }}</button>

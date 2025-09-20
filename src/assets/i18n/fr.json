@@ -1,0 +1,25 @@
+{
+  "app": { "title": "Trouver un tarif", "toggle": "EN" },
+  "nav": { "find": "Rechercher", "rates": "Tarifs" },
+  "find": {
+    "title": "Rechercher un tarif",
+    "from": "Lieu d’expédition",
+    "toCountry": "Destination",
+    "to": "Adresse ou code postal de destination",
+    "kind": "Que souhaitez-vous envoyer",
+    "dimensions": { "l": "L", "w": "l", "h": "H", "unit": "Unité" },
+    "weight": { "label": "Poids", "unit": "Unité" },
+    "submit": "Voir les tarifs",
+    "kindOptions": { "package": "Colis", "letter": "Lettre" },
+    "lenUnits": { "cm": "cm", "in": "po" },
+    "wtUnits": { "kg": "kg", "lb": "lb" }
+  },
+  "rates": {
+    "title": "Tarifs",
+    "back": "Retour à Rechercher",
+    "continue": "Continuer",
+    "summary": "Tarifs pour {{kind}} ({{weight}} {{wtUnit}}) {{l}}×{{w}}×{{h}} {{lenUnit}} vers {{to}}",
+    "eta": "jours ouvrables",
+    "co2": "kg CO₂e"
+  }
+}

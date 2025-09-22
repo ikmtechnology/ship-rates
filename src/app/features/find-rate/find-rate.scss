@@ -1,84 +1,76 @@
-.rate-container {
+.hero-wrapper {
+  position: relative;
+  min-height: 100vh;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   padding: 2rem;
   background: #f9f9f9;
+
+  .hero-bg {
+    position: absolute;
+    inset: 0; // full container
+    background:
+      linear-gradient(to right, #d6001c 35%, transparent 35%),
+      url('/assets/images/lady-laptop.jpg');
+    background-size: cover;
+    background-position: right center;
+    z-index: 0; // behind card
+  }
 }
+  .rate-card {
+  position: relative; z-index: 1;
+  background:#fff; border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.14);
+  max-width: 520px; width: 100%;
+  padding: 1.75rem 1.5rem;
 
-.rate-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  max-width: 420px;
-  width: 100%;
-
-  h2 {
-    font-size: 1.6rem;
-    margin-bottom: .5rem;
-  }
-
-  .subtitle {
-    font-size: .9rem;
-    color: #555;
-    margin-bottom: 1.5rem;
-
-    a {
-      color: #0050d7;
-      text-decoration: underline;
-    }
-  }
+  h2 { margin: 0 0 .5rem; font-size: 1.8rem; }
+  .subtitle { margin: 0 0 1.25rem; color:#555; line-height: 1.4; }
 
   form {
     display: grid;
-    gap: 1rem;
+    gap: 1rem;               /* <-- main vertical spacing */
 
     label {
       display: flex;
       flex-direction: column;
-      font-size: .9rem;
-      font-weight: 500;
+      gap: .35rem;           /* space between label text and control */
+      font-weight: 600;
       color: #222;
     }
 
     input, select {
-      margin-top: .25rem;
-      padding: .6rem .8rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: .95rem;
+      padding: .65rem .8rem;
+      border: 1px solid #cfcfcf;
+      border-radius: 8px;
+      font: inherit;
+      line-height: 1.2;
+      outline: none;
     }
+    input:focus, select:focus { border-color:#0b5fff; box-shadow: 0 0 0 3px rgba(11,95,255,.15); }
 
+    /* two-column rows (Size + Unit, Weight + Unit) */
     .grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 1rem;
+      align-items: end;
+    }
 
-      .dims {
-        display: flex;
-        gap: .5rem;
-        align-items: center;
-
-        input {
-          width: 60px;
-        }
-      }
+    /* L × W × H inputs side-by-side with small widths */
+    .dims {
+      display: flex; align-items: center; gap: .5rem;
+      input { width: 80px; }
     }
 
     .primary {
-      background: #0050d7;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      padding: .7rem 1.5rem;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-top: .5rem;
-
-      &:hover {
-        background: #003a9f;
-      }
+      margin-top: .25rem;
+      background:#0b5fff; color:#fff; border:0; cursor:pointer;
+      border-radius: 999px; padding: .8rem 1.4rem; font-weight:700;
+      transition: transform .05s ease, background .15s ease;
     }
+    .primary:hover { background:#094ed1; }
+    .primary:active { transform: translateY(1px); }
   }
 }

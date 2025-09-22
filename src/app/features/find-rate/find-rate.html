@@ -1,53 +1,72 @@
-<h2>{{ 'find.title' | translate }}</h2>
+<section class="rate-container">
+  <div class="rate-card">
+    <h2>Find a rate</h2>
+    <p class="subtitle">
+      Calculate and compare shipping and mailing rates for Canada and around the world.
+      <a href="#">View standard postage rates</a>
+    </p>
 
-<label>
-  {{ 'find.from' | translate }}
-  <input type="text" />
-</label>
+    <form>
+      <label>
+        Sending from
+        <input type="text" placeholder="Start typing the address or postal code" />
+      </label>
 
-<label>
-  {{ 'find.toCountry' | translate }}
-  <select>
-    <option value="Canada">Canada</option>
-    <option value="USA">USA</option>
-    <option value="International">International</option>
-  </select>
-</label>
+      <label>
+        Sending to
+        <select>
+          <option>Canada</option>
+          <option>USA</option>
+          <option>International</option>
+        </select>
+      </label>
 
-<label>
-  {{ 'find.to' | translate }}
-  <input type="text" />
-</label>
+      <label>
+        Destination address or postal code
+        <input type="text" placeholder="Enter destination address" />
+      </label>
 
-<label>
-  {{ 'find.kind' | translate }}
-  <select>
-    <option *ngFor="let o of kindOptions" [value]="o.value">
-      {{ o.label | translate }}
-    </option>
-  </select>
-</label>
+      <label>
+        What are you sending
+        <select>
+          <option>Package</option>
+          <option>Letter</option>
+        </select>
+      </label>
 
-<div class="grid3">
-  <label>{{ 'find.dimensions.l' | translate }} <input type="number"></label>
-  <label>{{ 'find.dimensions.w' | translate }} <input type="number"></label>
-  <label>{{ 'find.dimensions.h' | translate }} <input type="number"></label>
-  <label>
-    {{ 'find.dimensions.unit' | translate }}
-    <select>
-      <option *ngFor="let u of lenUnits" [value]="u">{{ ('find.lenUnits.' + u) | translate }}</option>
-    </select>
-  </label>
-</div>
+      <div class="grid">
+        <label>
+          Enter size (L × W × H)
+          <div class="dims">
+            <input type="number" value="1" /> ×
+            <input type="number" value="1" /> ×
+            <input type="number" value="1" />
+          </div>
+        </label>
+        <label>
+          Unit
+          <select>
+            <option>cm</option>
+            <option>in</option>
+          </select>
+        </label>
+      </div>
 
-<div class="grid2">
-  <label>{{ 'find.weight.label' | translate }} <input type="number"></label>
-  <label>
-    {{ 'find.weight.unit' | translate }}
-    <select>
-      <option *ngFor="let u of wtUnits" [value]="u">{{ ('find.wtUnits.' + u) | translate }}</option>
-    </select>
-  </label>
-</div>
+      <div class="grid">
+        <label>
+          Enter weight (up to 30 kg or 66 lbs)
+          <input type="number" value="1" />
+        </label>
+        <label>
+          Unit
+          <select>
+            <option>kg</option>
+            <option>lb</option>
+          </select>
+        </label>
+      </div>
 
-<button (click)="goToRates()">{{ 'find.submit' | translate }}</button>
+      <button type="submit" class="primary">View rates</button>
+    </form>
+  </div>
+</section>

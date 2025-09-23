@@ -1,5 +1,6 @@
 <section class="hero-wrapper">
   <div class="hero-bg"></div>
+
   <div class="rate-card">
     <h2>Find a rate</h2>
     <p class="subtitle">
@@ -7,31 +8,32 @@
       <a href="#">View standard postage rates</a>
     </p>
 
-    <form>
+    <!-- IMPORTANT: bind the form + submission -->
+    <form [formGroup]="form" (ngSubmit)="submit()">
       <label>
         Sending from
-        <input type="text" placeholder="Start typing the address or postal code" />
+        <input type="text" formControlName="from" placeholder="Start typing the address or postal code" />
       </label>
 
       <label>
         Sending to
-        <select>
-          <option>Canada</option>
-          <option>USA</option>
-          <option>International</option>
+        <select formControlName="toCountry">
+          <option value="Canada">Canada</option>
+          <option value="USA">USA</option>
+          <option value="International">International</option>
         </select>
       </label>
 
       <label>
         Destination address or postal code
-        <input type="text" placeholder="Enter destination address" />
+        <input type="text" formControlName="to" placeholder="Enter destination address" />
       </label>
 
       <label>
         What are you sending
-        <select>
-          <option>Package</option>
-          <option>Letter</option>
+        <select formControlName="kind">
+          <option value="Package">Package</option>
+          <option value="Letter">Letter</option>
         </select>
       </label>
 
@@ -39,16 +41,16 @@
         <label>
           Enter size (L × W × H)
           <div class="dims">
-            <input type="number" value="1" /> ×
-            <input type="number" value="1" /> ×
-            <input type="number" value="1" />
+            <input type="number" formControlName="l" step="0.1" /> ×
+            <input type="number" formControlName="w" step="0.1" /> ×
+            <input type="number" formControlName="h" step="0.1" />
           </div>
         </label>
         <label>
           Unit
-          <select>
-            <option>cm</option>
-            <option>in</option>
+          <select formControlName="lenUnit">
+            <option value="cm">cm</option>
+            <option value="in">in</option>
           </select>
         </label>
       </div>
@@ -56,19 +58,18 @@
       <div class="grid">
         <label>
           Enter weight (up to 30 kg or 66 lbs)
-          <input type="number" value="1" />
+          <input type="number" formControlName="weight" step="0.01" />
         </label>
         <label>
           Unit
-          <select>
-            <option>kg</option>
-            <option>lb</option>
+          <select formControlName="wtUnit">
+            <option value="kg">kg</option>
+            <option value="lb">lb</option>
           </select>
         </label>
       </div>
 
-      <button type="submit" class="primary">View rates</button>
+      <button class="primary" type="submit" [disabled]="form.invalid">View rates</button>
     </form>
   </div>
-  
 </section>

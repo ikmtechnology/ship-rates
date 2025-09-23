@@ -1,5 +1,17 @@
-<h2>{{ 'rates.title' | translate }}</h2>
-<a routerLink="/find">{{ 'rates.back' | translate }}</a>
+<h2>Choose a rate</h2>
+<p *ngIf="input()">
+  For {{ input()?.kind }} ({{ input()?.weight }} {{ input()?.wtUnit }})
+  {{ input()?.l }}×{{ input()?.w }}×{{ input()?.h }} {{ input()?.lenUnit }}
+  going to {{ input()?.to }}
+</p>
 
-<!-- Example of translated button on each card -->
-<button>{{ 'rates.continue' | translate }}</button>
+<div class="grid">
+  <article class="rate" *ngFor="let r of options()">
+    <h3>{{ r.serviceName }}</h3>
+    <div class="price">{{ r.total | currency:'CAD':'symbol' }}</div>
+    <ul>
+      <li *ngFor="let b of r.bullets">✓ {{ b }}</li>
+    </ul>
+    <small>⏱ {{ r.etaBusinessDays }} • 🌱 {{ r.co2kg }} kg CO₂e</small>
+  </article>
+</div>

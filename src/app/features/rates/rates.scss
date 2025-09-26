@@ -85,7 +85,8 @@
 .summary-table { display: grid; grid-template-columns: 1fr auto; gap: .3rem .8rem; margin-top: .5rem; }
 .summary-table .total { font-weight: 700; }
 details.expand summary { cursor: pointer; color: #0b5fff; }
-
+.addons input[type="number"] { width: 140px; margin-left: .5rem; }
+.addons .hint { margin-left: .5rem; font-size: .85rem; color: #666; }
 .card-body.is-loading { opacity: .6; pointer-events: none; }
 .spinner { font-size: .85rem; color: #555; margin-top: .4rem; }
 /* Responsive tweaks */

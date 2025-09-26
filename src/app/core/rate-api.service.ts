@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, delay } from 'rxjs';
 import { RateOption, ShipmentInput } from './models';
-
+type RecalcPayload = { selected: string[]; coverageAmount?: number };
 @Injectable({ providedIn: 'root' })
 export class RateApiService {
   getRates(_input: ShipmentInput): Observable<RateOption[]> {
@@ -38,22 +38,33 @@ export class RateApiService {
     ];
     return of(list).pipe(delay(200));
   }
+  
   /** Pretend this is a server call that adds/subtracts selected add-ons */
-  recalcRate(rate: RateOption, selectedAddonIds: string[]): Observable<RateOption> {
-    // compute new total from the *server*
+  /** Pretend server recomputation: checkbox add-ons + liability coverage amount */
+  recalcRate(
+    rate: RateOption,
+    payload: { selected: string[]; coverageAmount?: number } // <-- inlined type
+  ): Observable<RateOption> {
+
+    // sum regular checkboxes (exclude 'cov'; that's handled via coverageAmount)
     const addonsTotal = (rate.addons ?? [])
-      .filter(a => selectedAddonIds.includes(a.id))
+      .filter(a => a.id !== 'cov' && payload.selected.includes(a.id))
       .reduce((s, a) => s + a.price, 0);
+
+    // coverage fee: $2.75 per $100 (round UP)
+    const coverage = Math.max(0, Number(payload.coverageAmount ?? 0));
+    const units = Math.ceil(coverage / 100);
+    const coverageFee = units * 2.75;
+
+    const base = (rate.breakdown?.base ?? 0)
+               + (rate.breakdown?.fuel ?? 0)
+               + (rate.breakdown?.tax ?? 0);
 
     const newRate: RateOption = {
       ...rate,
-      total: +( (rate.breakdown?.base ?? 0)
-              + (rate.breakdown?.fuel ?? 0)
-              + (rate.breakdown?.tax ?? 0)
-              + addonsTotal ).toFixed(2)
+      total: +(base + addonsTotal + coverageFee).toFixed(2)
     };
 
-    // simulate network latency
     return of(newRate).pipe(delay(250));
   }
 }

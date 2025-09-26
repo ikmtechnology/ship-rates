@@ -32,22 +32,42 @@
         </ul>
 
         <!-- Dropdown 1: Add-in options -->
-      <details class="expand"
-              [attr.open]="isOpen[r.id] ? true : null">
-        <summary (click)="toggleOpen(r.id, $event)">Add in options</summary>
+        <details class="expand"
+                *ngIf="r.addons?.length"
+                [attr.open]="isOpen?.[r.id] ? true : null">
+          <summary (click)="toggleOpen(r.id, $event)">Add in options</summary>
 
-        <ul class="addons">
-          <li *ngFor="let a of r.addons">
-            <label>
-              <input type="checkbox"
-                    [checked]="isChecked(r.id, a.id)"
-                    (change)="toggleAddon(r, a)" />
-              {{ a.label }}
-            </label>
-            <span class="price">{{ a.price | currency:'CAD' }}</span>
-          </li>
-        </ul>
-      </details>
+          <ul class="addons">
+            <li *ngFor="let a of r.addons">
+              <!-- coverage input instead of checkbox -->
+              <ng-container *ngIf="a.id === 'cov'; else regularAddon">
+                <label>
+                  Liability coverage (per $100 $2.75)
+                  <input type="number"
+                        min="0"
+                        step="100"
+                        [ngModel]="(coverage()[r.id] || 0)"
+                        (ngModelChange)="setCoverage(r.id, $event)"
+                        (keydown.enter)="applyCoverage(r)"
+                        [disabled]="loading()[r.id]" />
+                </label>
+                <span class="hint">Press Enter to apply</span>
+              </ng-container>
+
+              <!-- regular checkbox add-ons -->
+              <ng-template #regularAddon>
+                <label>
+                  <input type="checkbox"
+                        [checked]="isChecked(r.id, a.id)"
+                        (change)="toggleAddon(r, a)"
+                        [disabled]="loading()[r.id]" />
+                  {{ a.label }}
+                </label>
+                <span class="price">{{ a.price | currency:'CAD' }}</span>
+              </ng-template>
+            </li>
+          </ul>
+        </details>
 
         <!-- Dropdown 2: Rate summary -->
         <details class="expand" *ngIf="r.breakdown">

@@ -17,7 +17,7 @@
       <div class="card-body">
         <div class="price">
           <div class="label">Total</div>
-          <div class="amount">{{ totalWithAddons(r) | currency:'CAD':'symbol':'1.2-2' }}</div>
+          <div class="amount">{{ r.total | currency:'CAD':'symbol':'1.2-2' }}</div>
         </div>
 
         <button class="primary">Continue</button>
@@ -32,20 +32,22 @@
         </ul>
 
         <!-- Dropdown 1: Add-in options -->
-        <details class="expand" *ngIf="r.addons?.length">
-          <summary>Add in options</summary>
-          <ul class="addons">
-            <li *ngFor="let a of r.addons">
-              <label>
-                <input type="checkbox"
-                       [checked]="isChecked(r.id, a.id)"
-                       (change)="toggleAddon(r, a)" />
-                {{ a.label }}
-              </label>
-              <span class="price">{{ a.price | currency:'CAD' }}</span>
-            </li>
-          </ul>
-        </details>
+      <details class="expand"
+              [attr.open]="isOpen[r.id] ? true : null">
+        <summary (click)="toggleOpen(r.id, $event)">Add in options</summary>
+
+        <ul class="addons">
+          <li *ngFor="let a of r.addons">
+            <label>
+              <input type="checkbox"
+                    [checked]="isChecked(r.id, a.id)"
+                    (change)="toggleAddon(r, a)" />
+              {{ a.label }}
+            </label>
+            <span class="price">{{ a.price | currency:'CAD' }}</span>
+          </li>
+        </ul>
+      </details>
 
         <!-- Dropdown 2: Rate summary -->
         <details class="expand" *ngIf="r.breakdown">

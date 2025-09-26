@@ -38,4 +38,22 @@ export class RateApiService {
     ];
     return of(list).pipe(delay(200));
   }
+  /** Pretend this is a server call that adds/subtracts selected add-ons */
+  recalcRate(rate: RateOption, selectedAddonIds: string[]): Observable<RateOption> {
+    // compute new total from the *server*
+    const addonsTotal = (rate.addons ?? [])
+      .filter(a => selectedAddonIds.includes(a.id))
+      .reduce((s, a) => s + a.price, 0);
+
+    const newRate: RateOption = {
+      ...rate,
+      total: +( (rate.breakdown?.base ?? 0)
+              + (rate.breakdown?.fuel ?? 0)
+              + (rate.breakdown?.tax ?? 0)
+              + addonsTotal ).toFixed(2)
+    };
+
+    // simulate network latency
+    return of(newRate).pipe(delay(250));
+  }
 }

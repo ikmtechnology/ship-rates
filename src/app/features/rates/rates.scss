@@ -86,6 +86,8 @@
 .summary-table .total { font-weight: 700; }
 details.expand summary { cursor: pointer; color: #0b5fff; }
 
+.card-body.is-loading { opacity: .6; pointer-events: none; }
+.spinner { font-size: .85rem; color: #555; margin-top: .4rem; }
 /* Responsive tweaks */
 @media (max-width: 768px) {
   .rates-wrapper { padding: .75rem; }

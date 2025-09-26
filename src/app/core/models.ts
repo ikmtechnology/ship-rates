@@ -1,12 +1,21 @@
+export interface AddonOption { id: string; label: string; price: number; }
+
+export interface RateBreakdown {
+  base: number;      // "Regular price"
+  fuel: number;      // "Fuel surcharge"
+  tax: number;       // "Tax"
+}
+
 export interface RateOption {
   id: string;
   serviceName: string;
-  total: number;           // CAD
-  etaBusinessDays: string; // e.g., "2 business days (Guaranteed)"
+  total: number;             // base + fuel + tax (+ selected add-ons if you choose)
+  etaBusinessDays: string;
   co2kg: number;
   bullets: string[];
+  addons?: AddonOption[];    // NEW
+  breakdown?: RateBreakdown; // NEW
 }
-
 export type UnitLen = 'cm'|'in';
 export type UnitWt  = 'kg'|'lb';
 export type Kind    = 'Package'|'Letter';

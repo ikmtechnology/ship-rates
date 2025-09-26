@@ -80,6 +80,11 @@
     background: #f5f8ff;
   }
 }
+.addons { list-style: none; padding: 0; margin: .4rem 0; }
+.addons li { display: flex; justify-content: space-between; align-items: center; margin: .25rem 0; }
+.summary-table { display: grid; grid-template-columns: 1fr auto; gap: .3rem .8rem; margin-top: .5rem; }
+.summary-table .total { font-weight: 700; }
+details.expand summary { cursor: pointer; color: #0b5fff; }
 
 /* Responsive tweaks */
 @media (max-width: 768px) {

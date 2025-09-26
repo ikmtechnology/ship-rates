@@ -12,14 +12,12 @@
 
   <div class="rate-grid">
     <article class="rate-card" *ngFor="let r of options()">
-      <header class="card-head">
-        <h4>{{ r.serviceName }}</h4>
-      </header>
+      <header class="card-head"><h4>{{ r.serviceName }}</h4></header>
 
       <div class="card-body">
         <div class="price">
           <div class="label">Total</div>
-          <div class="amount">{{ r.total | currency:'CAD':'symbol':'1.2-2' }}</div>
+          <div class="amount">{{ totalWithAddons(r) | currency:'CAD':'symbol':'1.2-2' }}</div>
         </div>
 
         <button class="primary">Continue</button>
@@ -33,14 +31,31 @@
           <li *ngFor="let b of r.bullets">✓ {{ b }}</li>
         </ul>
 
-        <details class="expand">
+        <!-- Dropdown 1: Add-in options -->
+        <details class="expand" *ngIf="r.addons?.length">
           <summary>Add in options</summary>
-          <p>(Signature, extra insurance, etc.)</p>
+          <ul class="addons">
+            <li *ngFor="let a of r.addons">
+              <label>
+                <input type="checkbox"
+                       [checked]="isChecked(r.id, a.id)"
+                       (change)="toggleAddon(r, a)" />
+                {{ a.label }}
+              </label>
+              <span class="price">{{ a.price | currency:'CAD' }}</span>
+            </li>
+          </ul>
         </details>
 
-        <details class="expand">
+        <!-- Dropdown 2: Rate summary -->
+        <details class="expand" *ngIf="r.breakdown">
           <summary>View rate summary</summary>
-          <p>(Breakdown: base, fuel surcharge, tax.)</p>
+          <div class="summary-table">
+            <div>Regular price</div><div>{{ r.breakdown!.base | currency:'CAD' }}</div>
+            <div>Fuel surcharge</div><div>{{ r.breakdown!.fuel | currency:'CAD' }}</div>
+            <div>Tax</div><div>{{ r.breakdown!.tax | currency:'CAD' }}</div>
+            <div class="total">Total</div><div class="total">{{ r.total | currency:'CAD' }}</div>
+          </div>
         </details>
       </div>
     </article>

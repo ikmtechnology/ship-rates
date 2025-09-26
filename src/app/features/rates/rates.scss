@@ -1,0 +1,88 @@
+.rates-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+.rates-header {
+  h2 { margin: 0 0 .25rem; font-size: 1.75rem; }
+  .summary {
+    margin: 0 0 1rem;
+    color: #555;
+    .edit { margin-left: .5rem; color: #0b5fff; }
+  }
+  h3 { margin: .25rem 0 1rem; font-size: 1.25rem; }
+}
+
+.rate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.rate-card {
+  background: #fff;
+  border: 1px solid #e7e7e7;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  overflow: hidden;
+
+  .card-head {
+    padding: .85rem 1rem;
+    border-bottom: 3px solid #ead7c1; /* the thin tan stripe in your mock */
+    h4 { margin: 0; font-size: 1.05rem; font-weight: 700; }
+  }
+
+  .card-body {
+    padding: 1rem;
+
+    .price {
+      .label { font-size: .85rem; color: #666; }
+      .amount { font-size: 1.9rem; font-weight: 800; margin: .15rem 0 .6rem; }
+    }
+
+    .primary {
+      width: 100%;
+      padding: .65rem 1rem;
+      border: 0;
+      border-radius: 999px;
+      background: #0b5fff;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: .6rem;
+      cursor: pointer;
+    }
+
+    .meta, .bullets {
+      list-style: none;
+      padding: 0;
+      margin: .25rem 0 .5rem;
+      li { margin: .25rem 0; color: #333; }
+    }
+
+    .expand {
+      margin-top: .25rem;
+      summary { cursor: pointer; color: #0b5fff; }
+      p { margin: .35rem 0 .5rem; color: #444; }
+    }
+  }
+}
+
+.footer-actions {
+  margin-top: 1rem;
+  .linklike {
+    display: inline-block;
+    padding: .5rem .9rem;
+    border: 1px solid #cfd8ff;
+    border-radius: 999px;
+    color: #0b5fff;
+    text-decoration: none;
+    background: #f5f8ff;
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .rates-wrapper { padding: .75rem; }
+  .rate-grid { grid-template-columns: 1fr; }
+}

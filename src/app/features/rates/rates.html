@@ -1,17 +1,52 @@
-<h2>Choose a rate</h2>
-<p *ngIf="input()">
-  For {{ input()?.kind }} ({{ input()?.weight }} {{ input()?.wtUnit }})
-  {{ input()?.l }}×{{ input()?.w }}×{{ input()?.h }} {{ input()?.lenUnit }}
-  going to {{ input()?.to }}
-</p>
+<section class="rates-wrapper">
+  <header class="rates-header">
+    <h2>Find a Rate</h2>
+    <p class="summary" *ngIf="input()">
+      Rates for {{ input()?.kind }} ({{ input()?.weight }} {{ input()?.wtUnit }})
+      {{ input()?.l }}×{{ input()?.w }}×{{ input()?.h }} {{ input()?.lenUnit }}
+      going to {{ input()?.to }}
+      <a class="edit" routerLink="/find">Edit details</a>
+    </p>
+    <h3>Choose a rate</h3>
+  </header>
 
-<div class="grid">
-  <article class="rate" *ngFor="let r of options()">
-    <h3>{{ r.serviceName }}</h3>
-    <div class="price">{{ r.total | currency:'CAD':'symbol' }}</div>
-    <ul>
-      <li *ngFor="let b of r.bullets">✓ {{ b }}</li>
-    </ul>
-    <small>⏱ {{ r.etaBusinessDays }} • 🌱 {{ r.co2kg }} kg CO₂e</small>
-  </article>
-</div>
+  <div class="rate-grid">
+    <article class="rate-card" *ngFor="let r of options()">
+      <header class="card-head">
+        <h4>{{ r.serviceName }}</h4>
+      </header>
+
+      <div class="card-body">
+        <div class="price">
+          <div class="label">Total</div>
+          <div class="amount">{{ r.total | currency:'CAD':'symbol':'1.2-2' }}</div>
+        </div>
+
+        <button class="primary">Continue</button>
+
+        <ul class="meta">
+          <li>⏱ {{ r.etaBusinessDays }}</li>
+          <li>🌱 {{ r.co2kg }} kg CO₂e</li>
+        </ul>
+
+        <ul class="bullets">
+          <li *ngFor="let b of r.bullets">✓ {{ b }}</li>
+        </ul>
+
+        <details class="expand">
+          <summary>Add in options</summary>
+          <p>(Signature, extra insurance, etc.)</p>
+        </details>
+
+        <details class="expand">
+          <summary>View rate summary</summary>
+          <p>(Breakdown: base, fuel surcharge, tax.)</p>
+        </details>
+      </div>
+    </article>
+  </div>
+
+  <div class="footer-actions">
+    <a routerLink="/find" class="linklike">Find another rate</a>
+  </div>
+</section>
